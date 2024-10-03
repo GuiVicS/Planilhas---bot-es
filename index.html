@@ -120,7 +120,7 @@
                 
                 // Adiciona evento de clique ao botão
                 button.onclick = function() {
-                    const whatsappLink = `https://api.whatsapp.com/send?phone=55${contact.phone}&text=${encodeURIComponent(message)}`;
+                    const whatsappLink = `https://web.whatsapp.com/send/?phone=55${contact.phone}&text=${encodeURIComponent(message)}`;
                     window.open(whatsappLink, '_blank');
                     this.classList.remove('btn-success');
                     this.classList.add('btn-secondary');
