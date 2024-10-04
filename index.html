@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
- 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerador de Links WhatsApp</title>
@@ -9,6 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
    <style>
+     .container {
+       padding-inline:100px;
+     }
      .header {
             display: flex;
             align-items: center;
@@ -29,14 +31,19 @@
 </head>
 <body>
     <div class="header">
-        <div class="logo">
+        <div class="container logo">
             <img src="https://alephmind.com.br/wp-content/uploads/2024/06/LOGO-2-300x86.png" alt="Logo">
         </div>
-        <h1>Gerador de Links WhatsApp</h1>
     </div>
-    <div class="container my-5">
+  
+    <div class="container  my-5">
+      <h1 class="h3">Gerador de Links WhatsApp</h1>
         <div class="mb-3">
             <input type="file" id="csvFileInput" class="form-control" accept=".csv" />
+        </div>
+        <div class="mb-3">
+            <label for="customMessage" class="form-label">Mensagem personalizada</label>
+            <textarea id="customMessage" class="form-control" rows="3">Oi, tudo bem? Sou o Misael, da Chosen Soluções Digitais. A gente ajuda empresas a crescer online com tráfego pago, gestão de mídias e criação de sites. Se você quiser dar aquele gás no digital, podemos bater um papo rápido pra ver como podemos te ajudar! O que acha?</textarea>
         </div>
         <button class="btn btn-primary mb-3" onclick="processCSV()">Gerar Links</button>
 
@@ -55,8 +62,6 @@
     </div>
 
     <script>
-        const message = "Oi, tudo bem? Sou o Misael, da Chosen Soluções Digitais. A gente ajuda empresas a crescer online com tráfego pago, gestão de mídias e criação de sites. Se você quiser dar aquele gás no digital, podemos bater um papo rápido pra ver como podemos te ajudar! O que acha?";
-
         // Função para processar o arquivo CSV
         function processCSV() {
             const fileInput = document.getElementById('csvFileInput');
@@ -99,6 +104,8 @@
             const tableBody = document.getElementById('whatsappTable');
             tableBody.innerHTML = ''; // Limpa a tabela anterior
 
+            const customMessage = document.getElementById('customMessage').value;
+
             contacts.forEach(contact => {
                 const row = document.createElement('tr');
                 
@@ -120,7 +127,7 @@
                 
                 // Adiciona evento de clique ao botão
                 button.onclick = function() {
-                    const whatsappLink = `https://web.whatsapp.com/send/?phone=55${contact.phone}&text=${encodeURIComponent(message)}`;
+                    const whatsappLink = `https://web.whatsapp.com/send/?phone=55${contact.phone}&text=${encodeURIComponent(customMessage)}`;
                     window.open(whatsappLink, '_blank');
                     this.classList.remove('btn-success');
                     this.classList.add('btn-secondary');
